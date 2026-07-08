@@ -4,10 +4,9 @@ import os
 
 app = FastAPI()
 
-# Connect to Redis container over the Docker Compose network
-redis_client = redis.Redis(
-    host=os.getenv("REDIS_HOST", "redis"),
-    port=6379,
+# Connect to Railway Redis
+redis_client = redis.from_url(
+    os.environ["REDIS_URL"],
     decode_responses=True
 )
 
