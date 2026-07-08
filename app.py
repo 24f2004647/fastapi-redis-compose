@@ -5,9 +5,12 @@ import os
 app = FastAPI()
 
 # Connect to Railway Redis
-redis_client = redis.from_url(
-    os.environ["REDIS_URL"],
-    decode_responses=True
+redis_client = redis.Redis(
+    host=os.getenv("REDISHOST"),
+    port=int(os.getenv("REDISPORT", 6379)),
+    username=os.getenv("REDISUSER", "default"),
+    password=os.getenv("REDISPASSWORD"),
+    decode_responses=True,
 )
 
 
